@@ -1,0 +1,8 @@
+FROM triaxis/simplicity-studio:4-base
+RUN /opt/SimplicityStudio_v4/studio \
+    -application org.eclipse.equinox.p2.director \
+    -r ${SILABS_REPOSITORY} \
+    -i com.silabs.ss.toolchain.gnu.arm.7.2.2017.q4.feature.feature.group \
+    && rm -rf /opt/SimplicityStudio_v4/p2/org.eclipse.equinox.p2.core/cache
+
+ENV PATH="/opt/SimplicityStudio_v4/developer/toolchains/gnu_arm/7.2_2017q4/bin:${PATH}"
