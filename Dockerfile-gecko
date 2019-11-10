@@ -2,7 +2,7 @@ FROM triaxis/simplicity-studio:4-gcc-7
 RUN /opt/SimplicityStudio_v4/studio \
     -application org.eclipse.equinox.p2.director \
     -r ${SILABS_REPOSITORY} \
-    -i com.silabs.sdk.gecko_platform.v2.6.feature.feature.group/2.6.3.201909121532-203 \
+    -i com.silabs.sdk.gecko_platform.v2.6.feature.feature.group/2.6.4.201911061713-208 \
     && rm -rf /opt/SimplicityStudio_v4/p2/org.eclipse.equinox.p2.core/cache
 
 ENV EFM32_SDK_ORIGIN="/opt/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.6/"
