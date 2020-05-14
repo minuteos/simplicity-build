@@ -4,10 +4,10 @@ set -e
 
 export DOCKER_BUILDKIT=1
 
-GECKO_VERSION=2.7.4
+GECKO_VERSION=2.7.5
 GECKO_VERSION_BASE=${GECKO_VERSION%.*}
 
-BLE_VERSION=2.13.4
+BLE_VERSION=2.13.5
 BLE_VERSION_BASE=${BLE_VERSION%.*}
 
 docker build -f Dockerfile -t triaxis/simplicity-studio:4-base .

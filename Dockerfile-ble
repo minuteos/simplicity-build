@@ -1,6 +1,6 @@
-FROM triaxis/simplicity-studio:4-gecko-2.7.4
+FROM triaxis/simplicity-studio:4-gecko-2.7.5
 RUN /opt/SimplicityStudio_v4/studio \
     -application org.eclipse.equinox.p2.director \
     -r ${SILABS_REPOSITORY} \
-    -i com.silabs.stack.ble.v2.13.feature.feature.group/2.13.4.0 \
+    -i com.silabs.stack.ble.v2.13.feature.feature.group/2.13.5.0 \
     && rm -rf /opt/SimplicityStudio_v4/p2/org.eclipse.equinox.p2.core/cache
