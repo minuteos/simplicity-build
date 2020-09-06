@@ -1,0 +1,58 @@
+on: [push]
+
+env:
+  GCC_VERSION: 7
+  GECKO_VERSION: 2.7.7
+  GECKO_VERSION_BASE: 2.7
+  BLE_VERSION: 2.13.7
+  BLE_VERSION_BASE: 2.13
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Pull previous builds
+        run: |
+          docker pull triaxis/simplicity-studio:4-base
+          docker pull triaxis/simplicity-studio:4-gcc-${{ env.GCC_VERSION }}
+          docker pull triaxis/simplicity-studio:4-gecko-${{ env.GECKO_VERSION_BASE }}
+          docker pull triaxis/simplicity-studio:4-ble-${{ env.BLE_VERSION_BASE }}
+
+      - uses: docker/build-push-action@v1
+        with:
+          dockerfile: Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: triaxis/simplicity-studio
+          cache_froms: triaxis/simplicity-studio:4-base
+          tags: 4-base
+
+      - uses: docker/build-push-action@v1
+        with:
+          dockerfile: Dockerfile-gcc
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: triaxis/simplicity-studio
+          cache_froms: triaxis/simplicity-studio:4-base,triaxis/simplicity-studio:4-gcc-${{ env.GCC_VERSION }}
+          tags: 4-gcc-${{ env.GCC_VERSION }}
+
+      - uses: docker/build-push-action@v1
+        with:
+          dockerfile: Dockerfile-gecko
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: triaxis/simplicity-studio
+          cache_froms: triaxis/simplicity-studio:4-gcc-${{ env.GCC_VERSION }},triaxis/simplicity-studio:4-gcc-${{ env.GECKO_VERSION_BASE }}
+          tags: 4-gecko-${{ env.GECKO_VERSION_BASE }},4-gecko-${{ env.GECKO_VERSION }}
+
+      - uses: docker/build-push-action@v1
+        with:
+          dockerfile: Dockerfile-ble
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: triaxis/simplicity-studio
+          cache_froms: triaxis/simplicity-studio:4-gcc-${{ env.GCC_VERSION }},triaxis/simplicity-studio:4-gcc-${{ env.GECKO_VERSION_BASE }},triaxis/simplicity-studio:4-gcc-${{ env.BLE_VERSION_BASE }}
+          tags: 4-ble-${{ env.BLE_VERSION_BASE }},4-ble-${{ env.BLE_VERSION }}
