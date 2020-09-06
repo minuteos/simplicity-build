@@ -8,7 +8,7 @@ RUN /opt/SimplicityStudio_v4/studio \
     -application org.eclipse.equinox.p2.director \
     -r ${SILABS_REPOSITORY} \
     -i com.silabs.apack.commander.feature.feature.group \
-    -i com.silabs.sdk.gecko_platform.v2.7.feature.feature.group/2.7.5.202004291824-264 \
+    -i com.silabs.sdk.gecko_platform.v2.7.feature.feature.group/2.7.7.202008240742-8 \
     && rm -rf /opt/SimplicityStudio_v4/p2/org.eclipse.equinox.p2.core/cache
 
 ENV EFM32_SDK_ORIGIN="/opt/SimplicityStudio_v4/developer/sdks/gecko_sdk_suite/v2.7/"
