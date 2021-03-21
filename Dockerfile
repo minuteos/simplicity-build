@@ -2,6 +2,7 @@ FROM debian:stretch
 RUN apt-get update && apt-get install -y \
     curl \
     make \
+    git \
     libglib2.0-0 \
     unzip \
     && rm -rf /var/lib/apt/lists/*
